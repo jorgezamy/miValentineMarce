@@ -38,7 +38,7 @@
       .photo {
         width: 150px;
         height: 150px;
-        margin: 0 auto 20px auto;
+        margin: 0 auto 10px auto;
         border-radius: 50%;
         overflow: hidden;
         border: 4px solid white;
@@ -118,13 +118,15 @@
         <img src="assets/foto.jpg" alt="Nosotros ❤️" />
       </div>
 
-      <h1>Marcela Martínez Reyna ❤️</h1>
-      <p>Este 14 de febrero quiero que sea especial...</p>
-      <p id="questionText">¿Te gustaría ser mi Valentine?</p>
+      <div id="initialContent">
+        <h1>Marcela Martínez Reyna ❤️</h1>
+        <p>Este 14 de febrero quiero que sea especial...</p>
+        <p>¿Te gustaría ser mi Valentine?</p>
 
-      <div class="buttons">
-        <button id="yesBtn">Sí 💖</button>
-        <button id="noBtn">No 😢</button>
+        <div class="buttons">
+          <button id="yesBtn">Sí 💖</button>
+          <button id="noBtn">No 😢</button>
+        </div>
       </div>
 
       <div id="message" class="romantic-message"></div>
@@ -155,27 +157,22 @@
       });
 
       yesBtn.addEventListener("click", () => {
-        const questionText = document.getElementById("questionText");
+        const initialContent = document.getElementById("initialContent");
 
-        // Ocultar pregunta
-        questionText.style.display = "none";
-
-        // Ocultar ambos botones
-        yesBtn.style.display = "none";
-        noBtn.style.display = "none";
+        // Ocultar TODO el contenido inicial
+        initialContent.style.display = "none";
 
         // Mostrar mensaje romántico
         message.style.display = "block";
         message.innerHTML = `
     <h2>Perfecto... sabía que aceptarías 😏❤️</h2>
-    <br>
     Marcela, eres la razón por la que sonrío todos los días ❤️<br><br>
     Quiero hacer de este 14 de febrero un recuerdo inolvidable.<br><br>
     Te veo el sábado 14 de febrero… mi amor 💕
   `;
 
         console.log("Le dio a SI");
-        console.log("Pregunta y botones ocultos correctamente");
+        console.log("Contenido inicial ocultado completamente");
       });
     </script>
   </body>
