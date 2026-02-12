@@ -118,6 +118,11 @@
         <img src="assets/foto.jpg" alt="Nosotros ❤️" />
       </div>
 
+      <div
+        id="countdown"
+        style="margin-bottom: 20px; font-size: 18px; font-weight: 600"
+      ></div>
+
       <div id="initialContent">
         <h1>Marcela Martínez Reyna ❤️</h1>
         <p>Este 14 de febrero quiero que sea especial...</p>
@@ -136,6 +141,38 @@
       const yesBtn = document.getElementById("yesBtn");
       const noBtn = document.getElementById("noBtn");
       const message = document.getElementById("message");
+
+      // ================== COUNTDOWN ==================
+      const countdownElement = document.getElementById("countdown");
+
+      // Fecha objetivo: 14 Febrero 2026 14:00 (2PM)
+      const targetDate = new Date("February 14, 2026 14:00:00").getTime();
+
+      const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance <= 0) {
+          countdownElement.innerHTML = "💖 Ya es nuestro día 💖";
+          clearInterval(interval);
+          console.log("Cuenta regresiva finalizada");
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
+
+        countdownElement.innerHTML = `
+    ⏳ Faltan ${days}d ${hours}h ${minutes}m ${seconds}s
+  `;
+
+        console.log("Countdown actualizado:", days, hours, minutes, seconds);
+      };
+
+      const interval = setInterval(updateCountdown, 1000);
+      updateCountdown();
 
       let yesScale = 1;
       let noScale = 1;
