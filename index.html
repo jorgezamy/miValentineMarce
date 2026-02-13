@@ -152,23 +152,41 @@
         const now = new Date().getTime();
         const distance = targetDate - now;
 
-        if (distance <= 0) {
-          countdownElement.innerHTML = "💖 Ya es nuestro día 💖";
-          clearInterval(interval);
-          console.log("Cuenta regresiva finalizada");
+        // Si aún no llega
+        if (distance > 0) {
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((distance / (1000 * 60)) % 60);
+          const seconds = Math.floor((distance / 1000) % 60);
+
+          countdownElement.innerHTML = `
+      ⏳ Falta ${days}d ${hours}h ${minutes}m ${seconds}s
+    `;
+
+          console.log("Countdown actualizado:", days, hours, minutes, seconds);
           return;
         }
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((distance / (1000 * 60)) % 60);
-        const seconds = Math.floor((distance / 1000) % 60);
+        // Si es exactamente el día (margen de 24 horas después de las 2PM)
+        const oneDayAfter = targetDate + 1000 * 60 * 60 * 24;
 
-        countdownElement.innerHTML = `
-    ⏳ Faltan ${days}d ${hours}h ${minutes}m ${seconds}s
-  `;
+        if (now <= oneDayAfter) {
+          countdownElement.innerHTML = `
+      <span style="font-size:22px; font-weight:bold;">
+        💖 Ya es nuestro día 💖
+      </span>
+    `;
+          console.log("Es 14 de febrero 💖");
+        } else {
+          countdownElement.innerHTML = `
+      <span style="font-size:22px; font-weight:bold;">
+        ✨ Algo nuevo ha comenzado ✨
+      </span>
+    `;
+          console.log("El 14 ya pasó ✨");
+        }
 
-        console.log("Countdown actualizado:", days, hours, minutes, seconds);
+        clearInterval(interval);
       };
 
       const interval = setInterval(updateCountdown, 1000);
